@@ -7,6 +7,18 @@ export function contarTotalMusicas() {
   return dadosHistory.length;
 }
 
+// Minutos ouvidos no total
+export function minutosOuvidosTotal() {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return 0;
+  }
+  while (dadosHistory.length > 0) {
+    dadosHistory.ms_played += 0;
+    const minutosTotais = Math.floor(dadosHistory.ms_played / 60000);
+  }
+  return minutosTotais;
+}
+
 export function obterPrimeiraMusica() {
   if (!dadosHistory || dadosHistory.length === 0) {
     return "Nenhuma música encontrada";
@@ -38,4 +50,45 @@ export function encontrarArtistaMaisOuvido() {
   }
 
   return artistaMaisOuvido;
+}
+
+export function obterTopMusicas(limit = 100) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+  const contagemMusicas = {};
+
+  dadosHistory.forEach(musica => {
+    const nome = musica.master_metadata_track_name;
+    if (nome) {
+      contagemMusicas[nome] = (contagemMusicas[nome] || 0) + 1;
+    }
+  });
+
+  return Object.entries(contagemMusicas)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([nome, contagem]) => ({ nome, contagem }));
+}
+
+
+export function tempoMedioDiario() {
+
+  const porDia = dadosHistory.reduce((acc, item) => {
+    const dia = item.ts.split("T")[0]; 
+    acc[dia] = (acc[dia] || 0) + item.ms_played;
+    return acc;
+  }, {});
+
+  const tempos = Object.values(porDia);
+
+  if (tempos.length === 0) return { mediaMs: 0, horas: 0, minutos: 0 };
+
+ 
+  const mediaMs = tempos.reduce((a, b) => a + b, 0) / tempos.length;
+
+  const horas = Math.floor(mediaMs / (1000 * 60 * 60));
+  const minutos = Math.floor((mediaMs % (1000 * 60 * 60)) / (1000 * 60));
+
+  return { mediaMs, horas, minutos };
 }

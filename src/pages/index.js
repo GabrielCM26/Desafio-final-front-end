@@ -1,4 +1,4 @@
-import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido } from '@/utils/dataProcessing'
+import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario,} from '@/utils/dataProcessing'
 
 export default function Home() {
 
@@ -26,6 +26,11 @@ export default function Home() {
             <div className="text-center p-4 bg-purple-50 rounded-lg">
               <div className="text-lg font-semibold text-purple-600 truncate">{encontrarArtistaMaisOuvido()}</div>
               <div className="text-gray-700">Artista mais ouvido</div>
+            </div>
+
+            <div className="text-center p-4 bg-purple-50 rounded-lg">
+              <div className="text-lg font-semibold text-yellow-600 truncate">{tempoMedioDiario().horas}h {tempoMedioDiario().minutos}m</div>
+              <div className="text-gray-700">Tempo Médio Diário</div>
             </div>
           </div>
 
