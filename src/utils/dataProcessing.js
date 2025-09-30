@@ -52,6 +52,7 @@ export function encontrarArtistaMaisOuvido() {
   return artistaMaisOuvido;
 }
 
+
 export function obterTopMusicas(limit = 100) {
   if (!dadosHistory || dadosHistory.length === 0) {
     return [];
@@ -60,17 +61,21 @@ export function obterTopMusicas(limit = 100) {
 
   dadosHistory.forEach(musica => {
     const nome = musica.master_metadata_track_name;
-    if (nome) {
-      contagemMusicas[nome] = (contagemMusicas[nome] || 0) + 1;
+    const artista = musica.master_metadata_album_artist_name;
+    if (nome && artista) {
+      const chave = `${nome}|||${artista}`; // Composite key
+      contagemMusicas[chave] = (contagemMusicas[chave] || 0) + 1;
     }
   });
 
   return Object.entries(contagemMusicas)
     .sort((a, b) => b[1] - a[1])
     .slice(0, limit)
-    .map(([nome, contagem]) => ({ nome, contagem }));
+    .map(([chave, contagem]) => {
+      const [nome, artista] = chave.split('|||');
+      return { nome, artista, contagem };
+    });
 }
-
 
 export function tempoMedioDiario() {
 
