@@ -15,7 +15,7 @@ export default function Navbar() {
           <Link href="/perfil" className={isActive('/perfil') ? 'bg-green-600 p-2' : 'p-2'}>
             👤
           </Link>
-          <Link href="/estatisticas" className={isActive('/estatisticas') ? 'bg-green-600 p-2' : 'p-2'}>
+          <Link href="/top100Artists" className={isActive('/top100Artists') ? 'bg-green-600 p-2' : 'p-2'}>
             📊
           </Link>
           <Link href="/pesquisa" className={isActive('/pesquisa') ? 'bg-green-600 p-2' : 'p-2'}>
