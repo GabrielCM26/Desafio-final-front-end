@@ -32,6 +32,11 @@ export default function Home() {
               <div className="text-lg font-semibold text-yellow-600 truncate">{tempoMedioDiario().horas}h {tempoMedioDiario().minutos}m</div>
               <div className="text-gray-700">Tempo Médio Diário</div>
             </div>
+
+            <div className="text-center p-4 bg-purple-50 rounded-lg">
+              <div className="text-lg font-semibold text-yellow-600 truncate">{minutosOuvidosTotal()}</div>
+              <div className="text-gray-700">Minutos de música ouvidos</div>
+            </div>
           </div>
 
       </div>

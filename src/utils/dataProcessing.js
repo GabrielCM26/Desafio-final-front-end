@@ -12,11 +12,10 @@ export function minutosOuvidosTotal() {
   if (!dadosHistory || dadosHistory.length === 0) {
     return 0;
   }
-  while (dadosHistory.length > 0) {
-    dadosHistory.ms_played += 0;
-    const minutosTotais = Math.floor(dadosHistory.ms_played / 60000);
-  }
-  return minutosTotais;
+  const somaMs = dadosHistory.reduce((acc, item) => acc + item.ms_played, 0);
+  const msParaMinutos = Math.floor(somaMs / 60000);
+
+  return msParaMinutos;
 }
 
 export function obterPrimeiraMusica() {
