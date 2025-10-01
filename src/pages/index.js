@@ -40,19 +40,19 @@ export default function Home() {
         </div>
 
 
-        <div class="card1">
-          <div class="card-details">
-            <p class="text-title">126,347</p>
-            <p class="text-body">Total Plays</p>
+        <div className="card1">
+          <div className="card-details">
+            <p className="text-title">126,347</p>
+            <p className="text-body">Total Plays</p>
           </div>
           
         </div>
-        <div class="card">
-          <div class="card-details">
-            <p class="text-title">547,128</p>
-            <p class="text-body">Total Minutes</p>
+        <div className="card">
+          <div className="card-details">
+            <p className="text-title">547,128</p>
+            <p className="text-body">Total Minutes</p>
           </div>
-          <button class="card-button">More info</button>
+          <button className="card-button">More info</button>
         </div>
 
       </div>
