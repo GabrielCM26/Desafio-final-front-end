@@ -80,6 +80,26 @@ export function obterTopMusicas(limit = 100) {
     .slice(0, limit);
 }
 
+export function obterTopArtistas(limit = 100) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+
+  const playsPorArtista = {};
+
+  dadosHistory.forEach(musica => {
+    const artista = musica.master_metadata_album_artist_name;
+
+    if (artista) {
+      playsPorArtista[artista] = (playsPorArtista[artista] || 0) + 1;
+    }
+  });
+
+  return Object.entries(playsPorArtista)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([artista, plays]) => ({ artista, plays }));
+}
 //Função para média de tempo diário a ouvir
 export function tempoMedioDiario() {
 
