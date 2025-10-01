@@ -30,8 +30,8 @@ body {
 
 /*---------------Card----------------*/
 .card1 {
- width: 190px;
- height: 254px;
+ width: 400px;
+ height: 200px;
  border-radius: 20px;
  background: #f5f5f5;
  position: relative;
@@ -64,6 +64,18 @@ body {
  color: rgb(134, 134, 134);
 }
 
+.cards-container {
+  display: grid;
+  grid-template-rows: auto auto; /* duas linhas */
+  justify-content: center;       /* centraliza o grid no container */
+  gap: 20px;
+}
+
+.cards-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
 /*Text Card*/
 .text-title {
  font-size: 1.5em;

@@ -40,18 +40,34 @@ export default function Home() {
         </div>
 
 
-        <div className="card1">
-          <div className="card-details">
-            <p className="text-title">126,347</p>
-            <p className="text-body">Total Plays</p>
+        <div className="cards-container">
+          {/* Linha 1 */}
+          <div className="cards-row">
+            <div className="card1">
+              <div className="card-details">
+                <p className="text-title">126,347</p>
+                <p className="text-body">Total Plays</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Linha 2 */}
+          <div className="cards-row">
+            <div className="card">
+              <div className="card-details">
+                <p className="text-title">547,128</p>
+                <p className="text-body">Total Minutes</p>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-details">
+                <p className="text-title">1,320</p>
+                <p className="text-body">Different Tracks</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="card">
-          <div className="card-details">
-            <p className="text-title">547,128</p>
-            <p className="text-body">Total Minutes</p>
-          </div>
-        </div>
+
 
       </div>
     </div>
