@@ -1,4 +1,4 @@
-import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal, musicasDiferentesOuvidasTotal,} from '@/utils/dataProcessing'
+import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal, } from '@/utils/dataProcessing'
 
 export default function Home() {
 
@@ -11,38 +11,49 @@ export default function Home() {
 
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">📊 Alguns dados:</h2>
-        
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-green-50 rounded-lg">
-              <div className="text-3xl font-bold text-green-600">{contarTotalMusicas()}</div>
-              <div className="text-gray-700">Total de reproduções</div>
-            </div>
-            
-            <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <div className="text-lg font-semibold text-blue-600 truncate">{obterPrimeiraMusica()}</div>
-              <div className="text-gray-700">Primeira música no histórico</div>
-            </div>
-            
-            <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <div className="text-lg font-semibold text-purple-600 truncate">{encontrarArtistaMaisOuvido()}</div>
-              <div className="text-gray-700">Artista mais ouvido</div>
-            </div>
 
-            <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <div className="text-lg font-semibold text-yellow-600 truncate">{tempoMedioDiario().horas}h {tempoMedioDiario().minutos}m</div>
-              <div className="text-gray-700">Tempo Médio Diário</div>
-            </div>
-
-            <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <div className="text-lg font-semibold text-yellow-600 truncate">{minutosOuvidosTotal()}</div>
-              <div className="text-gray-700">Minutos de música ouvidos</div>
-            </div>
-
-            <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <div className="text-lg font-semibold text-yellow-600 truncate">{musicasDiferentesOuvidasTotal()}</div>
-              <div className="text-gray-700">Músicad diferentes ouvidas</div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="text-center p-4 bg-green-50 rounded-lg">
+            <div className="text-3xl font-bold text-green-600">{contarTotalMusicas()}</div>
+            <div className="text-gray-700">Total de reproduções</div>
           </div>
+
+          <div className="text-center p-4 bg-blue-50 rounded-lg">
+            <div className="text-lg font-semibold text-blue-600 truncate">{obterPrimeiraMusica()}</div>
+            <div className="text-gray-700">Primeira música no histórico</div>
+          </div>
+
+          <div className="text-center p-4 bg-purple-50 rounded-lg">
+            <div className="text-lg font-semibold text-purple-600 truncate">{encontrarArtistaMaisOuvido()}</div>
+            <div className="text-gray-700">Artista mais ouvido</div>
+          </div>
+
+          <div className="text-center p-4 bg-purple-50 rounded-lg">
+            <div className="text-lg font-semibold text-yellow-600 truncate">{tempoMedioDiario().horas}h {tempoMedioDiario().minutos}m</div>
+            <div className="text-gray-700">Tempo Médio Diário</div>
+          </div>
+
+          <div className="text-center p-4 bg-purple-50 rounded-lg">
+            <div className="text-lg font-semibold text-yellow-600 truncate">{minutosOuvidosTotal()}</div>
+            <div className="text-gray-700">Minutos de música ouvidos</div>
+          </div>
+        </div>
+
+
+        <div class="card1">
+          <div class="card-details">
+            <p class="text-title">126,347</p>
+            <p class="text-body">Total Plays</p>
+          </div>
+          
+        </div>
+        <div class="card">
+          <div class="card-details">
+            <p class="text-title">547,128</p>
+            <p class="text-body">Total Minutes</p>
+          </div>
+          <button class="card-button">More info</button>
+        </div>
 
       </div>
     </div>
