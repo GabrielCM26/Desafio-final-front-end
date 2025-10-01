@@ -1,5 +1,6 @@
 import dadosHistory from "../data/history.json"
 
+//Função para ver quantas plays no total
 export function contarTotalMusicas() {
   if (!dadosHistory || dadosHistory.length === 0) {
     return 0;
@@ -7,7 +8,7 @@ export function contarTotalMusicas() {
   return dadosHistory.length;
 }
 
-// Minutos ouvidos no total
+//Função para minutos ouvidos no total
 export function minutosOuvidosTotal() {
   if (!dadosHistory || dadosHistory.length === 0) {
     return 0;
@@ -24,6 +25,7 @@ export function obterPrimeiraMusica() {
   }
   return dadosHistory[0]?.master_metadata_track_name || "Música desconhecida";
 }
+
 
 export function encontrarArtistaMaisOuvido() {
   if (!dadosHistory || dadosHistory.length === 0) {
@@ -51,7 +53,7 @@ export function encontrarArtistaMaisOuvido() {
   return artistaMaisOuvido;
 }
 
-
+//Função para lista top100 músicas
 export function obterTopMusicas(limit = 100) {
   if (!dadosHistory || dadosHistory.length === 0) {
     return [];
@@ -76,6 +78,7 @@ export function obterTopMusicas(limit = 100) {
     });
 }
 
+//Função para média de tempo diário a ouvir
 export function tempoMedioDiario() {
 
   const porDia = dadosHistory.reduce((acc, item) => {

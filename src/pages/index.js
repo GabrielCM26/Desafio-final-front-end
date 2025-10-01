@@ -1,4 +1,4 @@
-import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario,} from '@/utils/dataProcessing'
+import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal,} from '@/utils/dataProcessing'
 
 export default function Home() {
 
