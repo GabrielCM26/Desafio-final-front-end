@@ -100,3 +100,23 @@ export function tempoMedioDiario() {
 
   return { mediaMs, horas, minutos };
 }
+
+//Função para ver quantas músicas diferentes já foram ouvidas no total
+export function musicasDiferentesOuvidasTotal() {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+
+  const musicasDiferentes = new Set();
+
+  dadosHistory.forEach(musica => {
+    const nome = musica.master_metadata_track_name;
+    const artista = musica.master_metadata_album_artist_name;
+    if (nome && artista) {
+      const chave = `${nome}|||${artista}`;
+      musicasDiferentes.add(chave);
+    }
+  });
+
+  return musicasDiferentes.size;
+}
