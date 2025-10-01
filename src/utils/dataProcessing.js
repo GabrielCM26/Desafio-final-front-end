@@ -63,19 +63,20 @@ export function obterTopMusicas(limit = 100) {
   dadosHistory.forEach(musica => {
     const nome = musica.master_metadata_track_name;
     const artista = musica.master_metadata_album_artist_name;
+    const ms = musica.ms_played || 0;
     if (nome && artista) {
       const chave = `${nome}|||${artista}`; // Composite key
-      contagemMusicas[chave] = (contagemMusicas[chave] || 0) + 1;
+      if (!contagemMusicas[chave]) {
+        contagemMusicas[chave] = { nome, artista, msTotal: 0, plays: 0 };
+      }
+      contagemMusicas[chave].msTotal += ms;
+      contagemMusicas[chave].plays += 1;
     }
   });
 
-  return Object.entries(contagemMusicas)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, limit)
-    .map(([chave, contagem]) => {
-      const [nome, artista] = chave.split('|||');
-      return { nome, artista, contagem };
-    });
+  return Object.values(contagemMusicas)
+    .sort((a, b) => b.msTotal - a.msTotal)
+    .slice(0, limit);
 }
 
 //Função para média de tempo diário a ouvir
