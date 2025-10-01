@@ -14,7 +14,7 @@ export default function Top100() {
           <li key={idx}>
             <span className="text-[#222] font-bold">{musica.nome}</span>
             <span className="text-[#555] ml-2">({musica.artista})</span>
-            <span className="text-[#888] ml-2"> — {musica.contagem} vezes</span>
+            <span className="text-[#888] ml-2"> — {Math.floor(musica.msTotal / 60000)} Min</span>
           </li>
         ))}
       </ol>

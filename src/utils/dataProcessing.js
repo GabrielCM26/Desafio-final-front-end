@@ -32,7 +32,7 @@ export function encontrarArtistaMaisOuvido() {
     return "Nenhum artista encontrado";
   }
   const contagemArtistas = {};
-  
+
   dadosHistory.forEach(musica => {
     const artista = musica.master_metadata_album_artist_name;
     if (artista) {
@@ -42,7 +42,7 @@ export function encontrarArtistaMaisOuvido() {
 
   let artistaMaisOuvido = "Nenhum artista encontrado";
   let maiorContagem = 0;
-  
+
   for (const artista in contagemArtistas) {
     if (contagemArtistas[artista] > maiorContagem) {
       maiorContagem = contagemArtistas[artista];
@@ -63,26 +63,27 @@ export function obterTopMusicas(limit = 100) {
   dadosHistory.forEach(musica => {
     const nome = musica.master_metadata_track_name;
     const artista = musica.master_metadata_album_artist_name;
+    const ms = musica.ms_played || 0;
     if (nome && artista) {
       const chave = `${nome}|||${artista}`; // Composite key
-      contagemMusicas[chave] = (contagemMusicas[chave] || 0) + 1;
+      if (!contagemMusicas[chave]) {
+        contagemMusicas[chave] = { nome, artista, msTotal: 0, plays: 0 };
+      }
+      contagemMusicas[chave].msTotal += ms;
+      contagemMusicas[chave].plays += 1;
     }
   });
 
-  return Object.entries(contagemMusicas)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, limit)
-    .map(([chave, contagem]) => {
-      const [nome, artista] = chave.split('|||');
-      return { nome, artista, contagem };
-    });
+  return Object.values(contagemMusicas)
+    .sort((a, b) => b.msTotal - a.msTotal)
+    .slice(0, limit);
 }
 
 //Função para média de tempo diário a ouvir
 export function tempoMedioDiario() {
 
   const porDia = dadosHistory.reduce((acc, item) => {
-    const dia = item.ts.split("T")[0]; 
+    const dia = item.ts.split("T")[0];
     acc[dia] = (acc[dia] || 0) + item.ms_played;
     return acc;
   }, {});
@@ -91,7 +92,7 @@ export function tempoMedioDiario() {
 
   if (tempos.length === 0) return { mediaMs: 0, horas: 0, minutos: 0 };
 
- 
+
   const mediaMs = tempos.reduce((a, b) => a + b, 0) / tempos.length;
 
   const horas = Math.floor(mediaMs / (1000 * 60 * 60));
