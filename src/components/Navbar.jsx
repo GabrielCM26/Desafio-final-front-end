@@ -12,7 +12,7 @@ export default function Navbar() {
         </Link>
 
         <div className="flex space-x-6">
-          <Link href="/perfil" className={isActive('/perfil') ? 'bg-green-600 p-2' : 'p-2'}>
+          <Link href="/top100Artists" className={isActive('/top100Artists') ? 'bg-green-600 p-2' : 'p-2'}>
             👤
           </Link>
           <Link href="/top100Songs" className={isActive('/top100Songs') ? 'bg-green-600 p-2' : 'p-2'}>
