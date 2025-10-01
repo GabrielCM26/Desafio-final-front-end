@@ -58,23 +58,24 @@ export function obterTopMusicas(limit = 100) {
   if (!dadosHistory || dadosHistory.length === 0) {
     return [];
   }
-  const contagemMusicas = {};
+
+  const tempoPorMusica = {};
 
   dadosHistory.forEach(musica => {
     const nome = musica.master_metadata_track_name;
     const artista = musica.master_metadata_album_artist_name;
     const ms = musica.ms_played || 0;
+
     if (nome && artista) {
-      const chave = `${nome}|||${artista}`; // Composite key
-      if (!contagemMusicas[chave]) {
-        contagemMusicas[chave] = { nome, artista, msTotal: 0, plays: 0 };
+      const chave = `${nome}|||${artista}`;
+      if (!tempoPorMusica[chave]) {
+        tempoPorMusica[chave] = { nome, artista, msTotal: 0 };
       }
-      contagemMusicas[chave].msTotal += ms;
-      contagemMusicas[chave].plays += 1;
+      tempoPorMusica[chave].msTotal += ms;
     }
   });
 
-  return Object.values(contagemMusicas)
+  return Object.values(tempoPorMusica)
     .sort((a, b) => b.msTotal - a.msTotal)
     .slice(0, limit);
 }
