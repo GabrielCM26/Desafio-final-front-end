@@ -141,3 +141,24 @@ export function musicasDiferentesOuvidasTotal() {
 
   return musicasDiferentes.size;
 }
+
+export function horaMaisOuvida() {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+
+  const ocorrenciaIntervaloDeHoras = dadosHistory.reduce((acc, item) => {
+    const data = new Date(item.ts);
+    const horasTimestamp = data.getHours();
+    const chave = `${horasTimestamp}h-${horasTimestamp}h59`;
+    acc[chave] = (acc[chave] || 0) + 1;
+
+    return acc;
+  }, {});
+
+  const max = Object.entries(ocorrenciaIntervaloDeHoras).sort((a, b) => b[1] - a[1])[0][0];
+
+  return max;
+}
+
+
