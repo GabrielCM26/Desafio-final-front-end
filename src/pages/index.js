@@ -45,14 +45,12 @@ export default function Home() {
             <p className="text-title">126,347</p>
             <p className="text-body">Total Plays</p>
           </div>
-          
         </div>
         <div className="card">
           <div className="card-details">
             <p className="text-title">547,128</p>
             <p className="text-body">Total Minutes</p>
           </div>
-          <button className="card-button">More info</button>
         </div>
 
       </div>
