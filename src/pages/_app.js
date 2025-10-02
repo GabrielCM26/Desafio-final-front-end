@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 export default function App({ Component, pageProps }) {
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="container mx-auto px-4 py-10 flex-grow">
+      <main className="container flex-grow">
         <Component {...pageProps} />
       </main>
       <Footer />
