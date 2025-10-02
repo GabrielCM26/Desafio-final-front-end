@@ -80,6 +80,7 @@ export function obterTopMusicas(limit = 100) {
     .slice(0, limit);
 }
 
+//Função para fazer a lista dos top 100 artistas
 export function obterTopArtistas(limit = 100) {
   if (!dadosHistory || dadosHistory.length === 0) {
     return [];
@@ -100,6 +101,7 @@ export function obterTopArtistas(limit = 100) {
     .slice(0, limit)
     .map(([artista, plays]) => ({ artista, plays }));
 }
+
 //Função para média de tempo diário a ouvir
 export function tempoMedioDiario() {
 
@@ -142,6 +144,7 @@ export function musicasDiferentesOuvidasTotal() {
   return musicasDiferentes.size;
 }
 
+//função para mostrar a hora em que mais ouve spotify
 export function horaMaisOuvida() {
   if (!dadosHistory || dadosHistory.length === 0) {
     return [];
