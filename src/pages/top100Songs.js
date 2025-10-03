@@ -1,23 +1,42 @@
 import Link from 'next/link';
-import { obterTopMusicas } from '../utils/dataProcessing';
+import { obterTopMusicas, obterTopMusicas1, obterMusicas6, obterTopMusicas4 } from '../utils/dataProcessing';
+import { IoMdMusicalNote } from "react-icons/io";
+import { MdVerified } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
 
 export default function Top100() {
   const topMusicas = obterTopMusicas(100);
 
-  return (
-    <div className="max-w-[600px] mx-auto my-10 p-6 bg-[#f9f9f9] rounded-xl shadow-md">
-      <h1 className="text-center text-4xl font-bold text-[#2a3a5e] mb-8 tracking-wide shadow-[0_2px_8px_rgba(42,58,94,0.15)]">
-        🎵 Top 100 Músicas Mais Ouvidas 🎵
-      </h1>
-      <ol className="pl-6 text-lg">
+    return (
+    <div className="max-w-[440px] mx-auto pt-9 px-5">
+        <h1 className="flex gap-4 text-left text-2xl font-bold mb-10">
+          <span className="text-[#1DB954]"><IoMdMusicalNote /></span>
+          Your Top 100 Songs
+        </h1>
+        <div className="">
+          <div style={{borderRadius: "10px 10px 0px 0px"}} className="flex max-w-[440px] bg-[#212121] to-100% pt-3 pb-3 rounded-[10px] place-content-evenly">
+            <button onClick="" type="button" className="text-xs">4 weeks</button>
+            <button onClick="" type="button" className="text-xs">6 months</button>
+            <button onClick="" type="button" className="text-xs">1 year</button>
+            <button onClick="" type="button" className="text-xs">All time</button>
+          </div>
+        </div>
+      <ol className="text-sm">
         {topMusicas.map((musica, idx) => (
-          <li key={idx}>
-            <span className="text-[#222] font-bold">{musica.nome}</span>
-            <span className="text-[#555] ml-2">({musica.artista})</span>
-            <span className="text-[#888] ml-2"> — {Math.floor(musica.msTotal / 60000)} Min</span>
+          <li key={idx} className="relative bg-linear-to-r from-[#212121] from-50% to-[#121212] to-100% pl-4 p-3 py-4 rounded-[10px] mb-5 first:bg-[url(/img/album_cover_top100.png)] first:max-w-[440px] first:rounded-t-[0px] first:pt-[85%] first:bg-cover first:text-lg first:text-shadow-[0_0px_4px_rgb(0_0_0)]">
+            <Link href="/artistProfile" className="flex gap-3 space-between relative">
+              <p className="pt-2">#{idx + 1}</p>
+              <div className="bg-[#121212] text-[#B3B3B3] rounded-full p-2.5 mt-0.5"><FaUser /></div>
+              <span className="pt-2">{musica.nome}</span>
+              <span className="pt-2 text-[#B3B3B3]">{musica.artista}</span>
+              <div className="text-[#0D99FF] pt-3
+              "><MdVerified /></div>
+              <span className="absolute pt-[11px] text-[#B3B3B3] text-[12px] right-5">{Math.floor(musica.msTotal / 60000)} min</span>
+            </Link>
           </li>
         ))}
       </ol>
+
     </div>
   );
 }
