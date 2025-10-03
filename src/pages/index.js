@@ -1,10 +1,12 @@
-import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal, horaMaisOuvida, } from '@/utils/dataProcessing'
+import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal, horaMaisOuvida, estacaoMaisOuvida} from '@/utils/dataProcessing'
+import Link from 'next/link';
 
 export default function Home() {
   const artistaMaisOuvido = encontrarArtistaMaisOuvido();
   const tempoMedio = tempoMedioDiario();
   const minutosTotal = minutosOuvidosTotal();
   const horaPico = horaMaisOuvida();
+  const estacaoDoAnoMaisOuvida = estacaoMaisOuvida();
 
   return (
     <div className="">
@@ -101,7 +103,7 @@ export default function Home() {
             {/* Estação */}
             <div>
               <p className="text-gray-300">Most of them were played</p>
-              <p className="text-2xl font-bold text-purple-300">in Spring</p>
+              <p className="text-2xl font-bold text-purple-300">in {estacaoDoAnoMaisOuvida}</p>
             </div>
 
             {/* Total de minutos */}
@@ -112,9 +114,9 @@ export default function Home() {
             </div>
 
             {/* Botão final */}
-            <button className="bg-white text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition">
+            <Link href="/top100Artists" className="bg-white text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition">
               View Top Artists
-            </button>
+            </Link>
           </div>
         </div>
 
