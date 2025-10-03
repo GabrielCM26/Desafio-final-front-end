@@ -80,25 +80,50 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-center p-4 bg-purple-50 rounded-lg">
-            <div className="text-lg font-semibold text-yellow-600 truncate">{minutosOuvidosTotal()}</div>
-            <div className="text-gray-700">Minutos de música ouvidos</div>
-          </div>
+          <div className="min-h-screen flex flex-col items-center justify-center 
+                    bg-gradient-to-b from-black to-[#845569] to-[#EA97BB]
+                    text-white px-6 text-center space-y-16">
+            {/* Tempo diário */}
+            <div>
+              <p className="text-gray-300">You spend</p>
+              <p className="text-4xl font-bold text-green-400">
+                {tempoMedio.horas * 60 + tempoMedio.minutos} minutes
+              </p>
+              <p className="text-gray-300">per day listening to music</p>
+            </div>
 
-          <div className="text-center p-4 bg-purple-50 rounded-lg">
-            <div className="text-lg font-semibold text-yellow-600 truncate">{horaMaisOuvida()}</div>
-            <div className="text-gray-700">Intervalo do dia mais ouvido</div>
+            {/* Hora mais ouvida */}
+            <div>
+              <p className="text-gray-300">Especially in the</p>
+              <p className="text-3xl font-bold text-green-400">{horaPico}</p>
+            </div>
+
+            {/* Estação */}
+            <div>
+              <p className="text-gray-300">Most of them were played</p>
+              <p className="text-2xl font-bold text-purple-300">in Spring</p>
+            </div>
+
+            {/* Total de minutos */}
+            <div>
+              <p className="text-gray-300">In total you listened to</p>
+              <p className="text-2xl font-bold text-yellow-400">{minutosTotal} minutes</p>
+              <p className="text-gray-300">of music this year</p>
+            </div>
+
+            {/* Botão final */}
+            <button className="bg-white text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition">
+              View Top Artists
+            </button>
           </div>
         </div>
-
-
-
-
 
       </div>
 
     </div>
 
-    
+
+
+
   )
 }
