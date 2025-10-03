@@ -106,7 +106,7 @@ export function horaMaisOuvida() {
   const ocorrenciaIntervaloDeHoras = dadosHistory.reduce((acc, item) => {
     const data = new Date(item.ts);
     const horasTimestamp = data.getHours();
-    const chave = `${horasTimestamp}h-${horasTimestamp}h59`;
+    const chave = `${horasTimestamp}h-${horasTimestamp + 1}h`;
     acc[chave] = (acc[chave] || 0) + 1;
 
     return acc;
@@ -500,7 +500,7 @@ export function totalPlaysArtista(nomeArtista) {
   ).length;
 }
 
-// //======================= top 20 Artista =================================
+//======================= top 20 Artista =================================
 
 export function obterTop20MusicasArtista(nomeArtista, limit = 20) {
   if (!dadosHistory || dadosHistory.length === 0) {
