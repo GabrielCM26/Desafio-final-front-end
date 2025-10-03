@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router'
-import { obterTopArtistas } from '../utils/dataProcessing';
+import { obterTopArtistas, obterTopArtistas1, obterTopArtistas6, obterTopArtistas4 } from '../utils/dataProcessing';
 import { PiMicrophoneStageFill } from "react-icons/pi";
 import { MdVerified } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
@@ -8,7 +8,6 @@ import { FaUser } from "react-icons/fa";
 export default function Top100() {
   const topArtistas = obterTopArtistas(100);
   const router = useRouter()
-  const isActive = (path) => router.pathname === path
 
   return (
     <div className="max-w-[440px] mx-auto pt-9 px-5">
@@ -18,10 +17,10 @@ export default function Top100() {
         </h1>
         <div className="">
           <div style={{borderRadius: "10px 10px 0px 0px"}} className="flex max-w-[440px] bg-[#212121] to-100% pt-3 pb-3 rounded-[10px] place-content-evenly">
-            <button className="text-xs">4 weeks</button>
-            <button className="text-xs">6 months</button>
-            <button className="text-xs">1 year</button>
-            <button className="text-xs">All time</button>
+            <button onClick="" type="button" className="text-xs">4 weeks</button>
+            <button onClick="" type="button" className="text-xs">6 months</button>
+            <button onClick="" type="button" className="text-xs">1 year</button>
+            <button onClick="" type="button" className="text-xs">All time</button>
           </div>
         </div>
       <ol className="text-sm">
