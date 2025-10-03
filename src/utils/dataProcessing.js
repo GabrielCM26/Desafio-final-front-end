@@ -1,5 +1,7 @@
 import dadosHistory from "../data/history.json"
 
+// //======================= home page =================================
+
 //Função para ver quantas plays no total
 export function contarTotalMusicas() {
   if (!dadosHistory || dadosHistory.length === 0) {
@@ -52,6 +54,111 @@ export function encontrarArtistaMaisOuvido() {
 
   return artistaMaisOuvido;
 }
+
+//Função para média de tempo diário a ouvir
+export function tempoMedioDiario() {
+
+  const porDia = dadosHistory.reduce((acc, item) => {
+    const dia = item.ts.split("T")[0];
+    acc[dia] = (acc[dia] || 0) + item.ms_played;
+    return acc;
+  }, {});
+
+  const tempos = Object.values(porDia);
+
+  if (tempos.length === 0) return { mediaMs: 0, horas: 0, minutos: 0 };
+
+
+  const mediaMs = tempos.reduce((a, b) => a + b, 0) / tempos.length;
+
+  const horas = Math.floor(mediaMs / (1000 * 60 * 60));
+  const minutos = Math.floor((mediaMs % (1000 * 60 * 60)) / (1000 * 60));
+
+  return { mediaMs, horas, minutos };
+}
+
+//Função para ver quantas músicas diferentes já foram ouvidas no total
+export function musicasDiferentesOuvidasTotal() {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+
+  const musicasDiferentes = new Set();
+
+  dadosHistory.forEach(musica => {
+    const nome = musica.master_metadata_track_name;
+    const artista = musica.master_metadata_album_artist_name;
+    if (nome && artista) {
+      const chave = `${nome}|||${artista}`;
+      musicasDiferentes.add(chave);
+    }
+  });
+
+  return musicasDiferentes.size;
+}
+
+//função para mostrar a hora em que mais ouve spotify
+export function horaMaisOuvida() {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+
+  const ocorrenciaIntervaloDeHoras = dadosHistory.reduce((acc, item) => {
+    const data = new Date(item.ts);
+    const horasTimestamp = data.getHours();
+    const chave = `${horasTimestamp}h-${horasTimestamp}h59`;
+    acc[chave] = (acc[chave] || 0) + 1;
+
+    return acc;
+  }, {});
+
+  const max = Object.entries(ocorrenciaIntervaloDeHoras).sort((a, b) => b[1] - a[1])[0][0];
+
+  return max;
+}
+
+//encontra a estação do ano que mais ouve spotify
+export function estacaoMaisOuvida() {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return "Nenhuma estação encontrada";
+  }
+
+  function getEstacao(date) {
+    const dia = date.getDate();
+    const mes = date.getMonth() + 1;
+
+    if (
+      (mes === 3 && dia >= 21) || (mes > 3 && mes < 6) ||
+      (mes === 6 && dia <= 20)
+    ) return "Primavera";
+    if (
+      (mes === 6 && dia >= 21) || (mes > 6 && mes < 9) ||
+      (mes === 9 && dia <= 22)
+    ) return "Verão";
+    if (
+      (mes === 9 && dia >= 23) || (mes > 9 && mes < 12) ||
+      (mes === 12 && dia <= 20)
+    ) return "Outono";
+    //O que sobrar é inverno
+    return "Inverno";
+  }
+
+  const tempoPorEstacao = {};
+
+  dadosHistory.forEach(item => {
+    const date = new Date(item.ts);
+    const estacao = getEstacao(date);
+    const ms = item.ms_played || 0;
+    tempoPorEstacao[estacao] = (tempoPorEstacao[estacao] || 0) + ms;
+  });
+
+  const maisOuvida = Object.entries(tempoPorEstacao)
+    .sort((a, b) => b[1] - a[1])[0][0];
+
+  return maisOuvida;
+}
+
+// //======================= top 100 Músicas =================================
 
 //Função para lista top100 músicas
 export function obterTopMusicas(limit = 100) {
@@ -206,6 +313,8 @@ export function obterTopMusicas4(limit = 100) {
     .slice(0, limit);
 }
 
+// //======================= top 100 artistas =================================
+
 //Função para fazer a lista dos top 100 artistas
 export function obterTopArtistas(limit = 100) {
   if (!dadosHistory || dadosHistory.length === 0) {
@@ -335,108 +444,7 @@ export function obterTopArtistas4(limit = 100) {
     .map(([artista, plays]) => ({ artista, plays }));
 }
 
-//Função para média de tempo diário a ouvir
-export function tempoMedioDiario() {
-
-  const porDia = dadosHistory.reduce((acc, item) => {
-    const dia = item.ts.split("T")[0];
-    acc[dia] = (acc[dia] || 0) + item.ms_played;
-    return acc;
-  }, {});
-
-  const tempos = Object.values(porDia);
-
-  if (tempos.length === 0) return { mediaMs: 0, horas: 0, minutos: 0 };
-
-
-  const mediaMs = tempos.reduce((a, b) => a + b, 0) / tempos.length;
-
-  const horas = Math.floor(mediaMs / (1000 * 60 * 60));
-  const minutos = Math.floor((mediaMs % (1000 * 60 * 60)) / (1000 * 60));
-
-  return { mediaMs, horas, minutos };
-}
-
-//Função para ver quantas músicas diferentes já foram ouvidas no total
-export function musicasDiferentesOuvidasTotal() {
-  if (!dadosHistory || dadosHistory.length === 0) {
-    return [];
-  }
-
-  const musicasDiferentes = new Set();
-
-  dadosHistory.forEach(musica => {
-    const nome = musica.master_metadata_track_name;
-    const artista = musica.master_metadata_album_artist_name;
-    if (nome && artista) {
-      const chave = `${nome}|||${artista}`;
-      musicasDiferentes.add(chave);
-    }
-  });
-
-  return musicasDiferentes.size;
-}
-
-//função para mostrar a hora em que mais ouve spotify
-export function horaMaisOuvida() {
-  if (!dadosHistory || dadosHistory.length === 0) {
-    return [];
-  }
-
-  const ocorrenciaIntervaloDeHoras = dadosHistory.reduce((acc, item) => {
-    const data = new Date(item.ts);
-    const horasTimestamp = data.getHours();
-    const chave = `${horasTimestamp}h-${horasTimestamp}h59`;
-    acc[chave] = (acc[chave] || 0) + 1;
-
-    return acc;
-  }, {});
-
-  const max = Object.entries(ocorrenciaIntervaloDeHoras).sort((a, b) => b[1] - a[1])[0][0];
-
-  return max;
-}
-
-//encontra a estação do ano que mais ouve spotify
-export function estacaoMaisOuvida() {
-  if (!dadosHistory || dadosHistory.length === 0) {
-    return "Nenhuma estação encontrada";
-  }
-
-  function getEstacao(date) {
-    const dia = date.getDate();
-    const mes = date.getMonth() + 1;
-
-    if (
-      (mes === 3 && dia >= 21) || (mes > 3 && mes < 6) ||
-      (mes === 6 && dia <= 20)
-    ) return "Primavera";
-    if (
-      (mes === 6 && dia >= 21) || (mes > 6 && mes < 9) ||
-      (mes === 9 && dia <= 22)
-    ) return "Verão";
-    if (
-      (mes === 9 && dia >= 23) || (mes > 9 && mes < 12) ||
-      (mes === 12 && dia <= 20)
-    ) return "Outono";
-    //O que sobrar é inverno
-    return "Inverno";
-  }
-
-  const tempoPorEstacao = {};
-
-  dadosHistory.forEach(item => {
-    const date = new Date(item.ts);
-    const estacao = getEstacao(date);
-    const ms = item.ms_played || 0;
-    tempoPorEstacao[estacao] = (tempoPorEstacao[estacao] || 0) + ms;
-  });
-
-  const maisOuvida = Object.entries(tempoPorEstacao)
-    .sort((a, b) => b[1] - a[1])[0][0];
-
-  return maisOuvida;
-}
+// //======================= Perfil de Artista =================================
 
 //Função para ver quantas plays de um artista específico
 export function PlaysArtista(nomeArtista) {
