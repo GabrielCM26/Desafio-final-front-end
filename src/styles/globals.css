@@ -101,4 +101,51 @@ body {
  opacity: 1;
 }
 
-/*----------------------------------------*/
+/* Container geral do perfil */
+.profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Foto de perfil (círculo) */
+.profile-img {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background-color: #152f50;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Nome abaixo da foto */
+.profile-heading {
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Botão de editar (lápis) sobreposto */
+.edit-btn {
+  position: absolute;
+  bottom: 0;   /* canto inferior */
+  right: 0;    /* canto direito */
+  background: #1db954;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.edit-btn:hover {
+  background: #1ed760;
+}
+
+.edit-btn svg {
+  display: block;
+}
