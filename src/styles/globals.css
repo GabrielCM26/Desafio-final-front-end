@@ -81,25 +81,8 @@ body {
  font-weight: bold;
 }
 
-.card1:hover {
- border-color: #008bf8;
- box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
-}
 
-.card1:hover .card1-button {
- transform: translate(-50%, 50%);
- opacity: 1;
-}
-/*Hover Card*/
-.card:hover {
- border-color: #008bf8;
- box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
-}
 
-.card:hover .card-button {
- transform: translate(-50%, 50%);
- opacity: 1;
-}
 
 /* Container geral do perfil */
 .profile {
@@ -139,7 +122,6 @@ body {
   border-radius: 50%;
   padding: 5px;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
 .edit-btn:hover {
