@@ -10,7 +10,7 @@ export default function Navbar() {
   const isActive = (path) => router.pathname === path
 
   return (
-    <nav className="bg-black text-white p-3 fixed bottom-0 w-full flex justify-center pb-safe">
+    <nav className="bg-black text-white p-3 fixed bottom-0 left-0 right-0 w-full flex justify-center pb-safe">
       <div className="flex justify-center w-full">
         <div className="flex items-center justify-between max-w-[428px] w-full px-6">
           {/* Homepage/Perfil de Utilizador */}
