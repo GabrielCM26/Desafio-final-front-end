@@ -57,15 +57,9 @@ export default function PerfilArtista() {
         </div>
 
         <div className="bg-green-700 text-white rounded-lg fixed bottom-14 left-0 right-0 p-2 mx-auto flex items-center justify-center max-w-sm w-[90%]">
-          <p className="text-center text-2xl font-black">TOP 20</p>
+          <Link href="/top20Artists" className="text-center text-2xl font-black">TOP 20</Link>
         </div>
       </div>
-
-
-
-      
-
-
 
     </div>
 
