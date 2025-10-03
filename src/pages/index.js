@@ -1,4 +1,5 @@
 import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal, horaMaisOuvida, } from '@/utils/dataProcessing'
+import Link from 'next/link';
 
 export default function Home() {
   const tempoMedio = tempoMedioDiario();
@@ -112,7 +113,7 @@ export default function Home() {
 
             {/* Botão final */}
             <button className="bg-white text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition">
-             <a>View Top Artists</a> 
+             <Link href="/top100Artists">View Top Artists</Link>
             </button>
           </div>
         </div>

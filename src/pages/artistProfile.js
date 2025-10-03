@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { MdVerified } from "react-icons/md";
-import { PlaysArtista, minutosArtista, quantidadeMusicasArtista, totalPlaysArtista } from '../utils/dataProcessing';
+import { PlaysArtista, minutosArtista, obterTopArtistas, quantidadeMusicasArtista, totalPlaysArtista } from '../utils/dataProcessing';
 
 
 export default function PerfilArtista() {
@@ -8,6 +8,7 @@ export default function PerfilArtista() {
   const minutos = minutosArtista("Kendrick Lamar");
   const quantidade = quantidadeMusicasArtista("Kendrick Lamar");
   const totalPlays = totalPlaysArtista("Kendrick Lamar");
+  const posicaoArtista = obterTopArtistas("Kendrick Lamar");
 
   return (
     <div className="bg-black min-h-screen">
@@ -24,7 +25,7 @@ export default function PerfilArtista() {
             <figcaption className="absolute px-4 text-lg text-white bottom-3">
               <p className="text-xs text-amber-300">☀️ artist</p>
               <p className="text-3xl font-bold inline-flex items-center gap-2">KENDRICK LAMAR<span className="text-[#0D99FF]"><MdVerified /></span></p>
-              <p className="text-xs">TOP #6</p>
+              <p className="text-xs">TOP #1</p>
             </figcaption>
           </figure>
         </div>
