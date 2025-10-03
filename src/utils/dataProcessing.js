@@ -437,3 +437,19 @@ export function estacaoMaisOuvida() {
 
   return maisOuvida;
 }
+
+//Função para ver quantas plays de um artista específico
+export function PlaysArtista(nomeArtista) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return 0;
+  }
+
+  const totalPlays = dadosHistory.length;
+  const playsArtista = dadosHistory.filter(
+    musica => musica.master_metadata_album_artist_name === nomeArtista
+  ).length;
+
+  if (totalPlays === 0) return 0;
+
+  return ((playsArtista / totalPlays) * 100).toFixed(2); 
+}
