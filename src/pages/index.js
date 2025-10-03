@@ -1,5 +1,4 @@
-import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal, horaMaisOuvida, } from '@/utils/dataProcessing'
-import Link from 'next/link';
+import { encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal, horaMaisOuvida, } from '@/utils/dataProcessing'
 
 export default function Home() {
   const tempoMedio = tempoMedioDiario();
@@ -65,7 +64,20 @@ export default function Home() {
             </div>
           </div>
           {/* e acaba aquii joao  */}
-          
+          <div className="cards-row">
+            <div className="card">
+              <div className="card-details">
+                <p className="text-title">{encontrarArtistaMaisOuvido()}</p>
+                <p className="text-body">Artista mais ouvido</p>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-details">
+                <p className="text-title">{tempoMedioDiario().horas}h {tempoMedioDiario().minutos}m</p>
+                <p className="text-body">Tempo Médio Diário</p>
+              </div>
+            </div>
+          </div>
 
           <div className="min-h-screen flex flex-col items-center justify-center 
                     bg-gradient-to-b from-black to-[#EA97BB] to-[#845569]
@@ -100,7 +112,7 @@ export default function Home() {
 
             {/* Botão final */}
             <button className="bg-white text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition">
-             <Link href="/top100Artists">View Top Artists</Link>
+              <a>View Top Artists</a>
             </button>
           </div>
         </div>
