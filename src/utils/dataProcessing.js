@@ -80,6 +80,132 @@ export function obterTopMusicas(limit = 100) {
     .slice(0, limit);
 }
 
+export function obterTopMusicas6(limit = 100) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+
+  // Encontra a data mais recente no histórico
+  const mostRecent = dadosHistory.reduce((max, item) => {
+    const date = new Date(item.ts);
+    return date > max ? date : max;
+  }, new Date(dadosHistory[0].ts));
+
+  // Calcula a data de corte (6 meses antes da mais recente)
+  const cutoff = new Date(mostRecent);
+  cutoff.setMonth(cutoff.getMonth() - 6);
+
+  // Filtra o histórico para os últimos 6 meses
+  const filteredHistory = dadosHistory.filter(item => {
+    const date = new Date(item.ts);
+    return date >= cutoff && date <= mostRecent;
+  });
+
+  const tempoPorMusica = {};
+
+  filteredHistory.forEach(musica => {
+    const nome = musica.master_metadata_track_name;
+    const artista = musica.master_metadata_album_artist_name;
+    const ms = musica.ms_played || 0;
+
+    if (nome && artista) {
+      const chave = `${nome}|||${artista}`;
+      if (!tempoPorMusica[chave]) {
+        tempoPorMusica[chave] = { nome, artista, msTotal: 0 };
+      }
+      tempoPorMusica[chave].msTotal += ms;
+    }
+  });
+
+  return Object.values(tempoPorMusica)
+    .sort((a, b) => b.msTotal - a.msTotal)
+    .slice(0, limit);
+}
+
+export function obterTopMusicas1(limit = 100) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+
+  // Encontra a data mais recente no histórico
+  const mostRecent = dadosHistory.reduce((max, item) => {
+    const date = new Date(item.ts);
+    return date > max ? date : max;
+  }, new Date(dadosHistory[0].ts));
+
+  // Calcula a data de corte (1 ano antes da mais recente)
+  const cutoff = new Date(mostRecent);
+  cutoff.setMonth(cutoff.getMonth() - 12);
+
+  // Filtra o histórico para o ultimo ano
+  const filteredHistory = dadosHistory.filter(item => {
+    const date = new Date(item.ts);
+    return date >= cutoff && date <= mostRecent;
+  });
+
+  const tempoPorMusica = {};
+
+  filteredHistory.forEach(musica => {
+    const nome = musica.master_metadata_track_name;
+    const artista = musica.master_metadata_album_artist_name;
+    const ms = musica.ms_played || 0;
+
+    if (nome && artista) {
+      const chave = `${nome}|||${artista}`;
+      if (!tempoPorMusica[chave]) {
+        tempoPorMusica[chave] = { nome, artista, msTotal: 0 };
+      }
+      tempoPorMusica[chave].msTotal += ms;
+    }
+  });
+
+  return Object.values(tempoPorMusica)
+    .sort((a, b) => b.msTotal - a.msTotal)
+    .slice(0, limit);
+}
+
+export function obterTopMusicas4(limit = 100) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+
+  // Encontra a data mais recente no histórico
+  const mostRecent = dadosHistory.reduce((max, item) => {
+    const date = new Date(item.ts);
+    return date > max ? date : max;
+  }, new Date(dadosHistory[0].ts));
+
+  // Calcula a data de corte (28 dias antes da mais recente)
+  const cutoff = new Date(mostRecent);
+  cutoff.setDate(cutoff.getDate() - 28);
+
+  // Filtra o histórico para as últimas 4 semanas
+  const filteredHistory = dadosHistory.filter(item => {
+    const date = new Date(item.ts);
+    return date >= cutoff && date <= mostRecent;
+  });
+
+  const tempoPorMusica = {};
+
+  filteredHistory.forEach(musica => {
+    const nome = musica.master_metadata_track_name;
+    const artista = musica.master_metadata_album_artist_name;
+    const ms = musica.ms_played || 0;
+
+    if (nome && artista) {
+      const chave = `${nome}|||${artista}`;
+      if (!tempoPorMusica[chave]) {
+        tempoPorMusica[chave] = { nome, artista, msTotal: 0 };
+      }
+      tempoPorMusica[chave].msTotal += ms;
+    }
+  });
+
+  return Object.values(tempoPorMusica)
+    .sort((a, b) => b.msTotal - a.msTotal)
+    .slice(0, limit);
+}
+
 //Função para fazer a lista dos top 100 artistas
 export function obterTopArtistas(limit = 100) {
   if (!dadosHistory || dadosHistory.length === 0) {
