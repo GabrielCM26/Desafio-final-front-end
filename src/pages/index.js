@@ -1,12 +1,9 @@
-import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal, horaMaisOuvida, estacaoMaisOuvida} from '@/utils/dataProcessing'
-import Link from 'next/link';
+import { contarTotalMusicas, obterPrimeiraMusica, encontrarArtistaMaisOuvido, tempoMedioDiario, minutosOuvidosTotal, horaMaisOuvida, } from '@/utils/dataProcessing'
 
 export default function Home() {
-  const artistaMaisOuvido = encontrarArtistaMaisOuvido();
   const tempoMedio = tempoMedioDiario();
   const minutosTotal = minutosOuvidosTotal();
   const horaPico = horaMaisOuvida();
-  const estacaoDoAnoMaisOuvida = estacaoMaisOuvida();
 
   return (
     <div className="">
@@ -83,7 +80,7 @@ export default function Home() {
           </div>
 
           <div className="min-h-screen flex flex-col items-center justify-center 
-                    bg-gradient-to-b from-black to-[#845569] to-[#EA97BB]
+                    bg-gradient-to-b from-black to-[#EA97BB] to-[#845569]
                     text-white px-6 text-center space-y-16">
             {/* Tempo diário */}
             <div>
@@ -103,7 +100,7 @@ export default function Home() {
             {/* Estação */}
             <div>
               <p className="text-gray-300">Most of them were played</p>
-              <p className="text-2xl font-bold text-purple-300">in {estacaoDoAnoMaisOuvida}</p>
+              <p className="text-2xl font-bold text-purple-300">in Spring</p>
             </div>
 
             {/* Total de minutos */}
@@ -114,9 +111,9 @@ export default function Home() {
             </div>
 
             {/* Botão final */}
-            <Link href="/top100Artists" className="bg-white text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition">
-              View Top Artists
-            </Link>
+            <button className="bg-white text-black px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-gray-200 transition">
+             <a>View Top Artists</a> 
+            </button>
           </div>
         </div>
 

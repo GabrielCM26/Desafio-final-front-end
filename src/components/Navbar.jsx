@@ -27,12 +27,7 @@ export default function Navbar() {
           <Link href="/top100Songs" className={isActive('/top100Songs') ? 'text-[#1DB954] p-2 text-2xl' : 'p-2 text-2xl'}>
             <IoMdMusicalNote />
           </Link>
-
-          {/* Pesquisa */}
-          <Link href="/pesquisa" className={isActive('/pesquisa') ? 'text-[#1DB954] p-2 text-2xl' : 'p-2 text-2xl'}>
-            <FaMagnifyingGlass />
-          </Link>
-          
+    
         </div>
       </div>
     </nav>
