@@ -397,4 +397,43 @@ export function horaMaisOuvida() {
   return max;
 }
 
+//encontra a estação do ano que mais ouve spotify
+export function estacaoMaisOuvida() {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return "Nenhuma estação encontrada";
+  }
 
+  function getEstacao(date) {
+    const dia = date.getDate();
+    const mes = date.getMonth() + 1; 
+
+    if (
+      (mes === 3 && dia >= 21) || (mes > 3 && mes < 6) ||
+      (mes === 6 && dia <= 20)
+    ) return "Primavera";
+    if (
+      (mes === 6 && dia >= 21) || (mes > 6 && mes < 9) ||
+      (mes === 9 && dia <= 22)
+    ) return "Verão";
+    if (
+      (mes === 9 && dia >= 23) || (mes > 9 && mes < 12) ||
+      (mes === 12 && dia <= 20)
+    ) return "Outono";
+    //O que sobrar é inverno
+    return "Inverno";
+  }
+
+  const tempoPorEstacao = {};
+
+  dadosHistory.forEach(item => {
+    const date = new Date(item.ts);
+    const estacao = getEstacao(date);
+    const ms = item.ms_played || 0;
+    tempoPorEstacao[estacao] = (tempoPorEstacao[estacao] || 0) + ms;
+  });
+
+  const maisOuvida = Object.entries(tempoPorEstacao)
+    .sort((a, b) => b[1] - a[1])[0][0];
+
+  return maisOuvida;
+}
