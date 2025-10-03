@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { MdVerified } from "react-icons/md";
+import { PlaysArtista } from '../utils/dataProcessing';
+
 
 export default function PerfilArtista() {
+  const porcentagem = PlaysArtista("Kendrick Lamar");
+
   return (
     <div className="bg-black min-h-screen">
 
@@ -40,8 +44,9 @@ export default function PerfilArtista() {
                 <p className="text-xs text-gray-500 text-center tracking-wide">musics played</p>
               </div>
             </div>
-            <div className="bg-linear-to-r from-[#212121] from-50% to-[#121212] to-100% rounded-[10px] p-6">
-              % das plays dentro do total
+            <div className="bg-linear-to-r from-[#212121] from-50% to-[#121212] to-100% rounded-[10px] p-6 flex flex-col items-center justify-center">
+              <p className="text-3xl font-bold">{porcentagem}%</p>
+              <p className="text-xs text-gray-500 text-center">das plays dentro do total</p>
             </div>
           </div>
 
