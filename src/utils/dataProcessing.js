@@ -405,7 +405,7 @@ export function estacaoMaisOuvida() {
 
   function getEstacao(date) {
     const dia = date.getDate();
-    const mes = date.getMonth() + 1; 
+    const mes = date.getMonth() + 1;
 
     if (
       (mes === 3 && dia >= 21) || (mes > 3 && mes < 6) ||
@@ -451,5 +451,43 @@ export function PlaysArtista(nomeArtista) {
 
   if (totalPlays === 0) return 0;
 
-  return ((playsArtista / totalPlays) * 100).toFixed(2); 
+  return ((playsArtista / totalPlays) * 100).toFixed(2);
+}
+
+//conta quantos minutos ouviu de um artista
+export function minutosArtista(nomeArtista) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return 0;
+  }
+
+  const msTotal = dadosHistory
+    .filter(musica => musica.master_metadata_album_artist_name === nomeArtista)
+    .reduce((acc, musica) => acc + (musica.ms_played || 0), 0);
+
+  return Math.floor(msTotal / 60000); // minutos
+}
+
+//conta quantas músicas diferentes ouviu de um artista
+export function quantidadeMusicasArtista(nomeArtista) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return 0;
+  }
+
+  const musicas = dadosHistory
+    .filter(musica => musica.master_metadata_album_artist_name === nomeArtista && musica.master_metadata_track_name)
+    .map(musica => musica.master_metadata_track_name);
+
+  
+  const musicasUnicas = new Set(musicas);
+
+  return musicasUnicas.size;
+}
+
+export function totalPlaysArtista(nomeArtista) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return 0;
+  }
+  return dadosHistory.filter(
+    musica => musica.master_metadata_album_artist_name === nomeArtista
+  ).length;
 }

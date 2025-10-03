@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import { MdVerified } from "react-icons/md";
-import { PlaysArtista } from '../utils/dataProcessing';
+import { PlaysArtista, minutosArtista, quantidadeMusicasArtista, totalPlaysArtista } from '../utils/dataProcessing';
 
 
 export default function PerfilArtista() {
   const porcentagem = PlaysArtista("Kendrick Lamar");
+  const minutos = minutosArtista("Kendrick Lamar");
+  const quantidade = quantidadeMusicasArtista("Kendrick Lamar");
+  const totalPlays = totalPlaysArtista("Kendrick Lamar");
 
   return (
     <div className="bg-black min-h-screen">
@@ -31,7 +34,7 @@ export default function PerfilArtista() {
             <div className="flex flex-row gap-4 items-center">
               <img src="./img/botao_play_pag_artist.png" alt="Imagem botão play" className="w-14 h-14 mb-2" />
               <div className="flex flex-col items-center ">
-                <p className="text-4xl font-bold tracking-wide">12,4K</p>
+                <p className="text-4xl font-bold tracking-wide">{totalPlays}</p>
                 <p className="text-xs text-gray-500 tracking-wide">nº de plays</p>
               </div>
             </div>
@@ -40,7 +43,7 @@ export default function PerfilArtista() {
           <div className="flex flex-row gap-4 mt-4">
             <div className="bg-linear-to-r from-[#212121] from-50% to-[#121212] to-100% rounded-[10px] p-6 px-13">
               <div className="flex flex-col items-center">
-                <p className="text-4xl font-bold tracking-widest">30</p>
+                <p className="text-4xl font-bold tracking-widest">{quantidade}</p>
                 <p className="text-xs text-gray-500 text-center tracking-wide">musics played</p>
               </div>
             </div>
@@ -54,7 +57,7 @@ export default function PerfilArtista() {
             <div className="flex flex-row gap-4 items-center">
               <img src="./img/icon-music-rhythm_pag_artist.png" alt="Ícone música" className="w-14 h-14 mb-2" />
               <div className="flex flex-col items-center">
-                <p className="text-4xl font-bold">34,5K</p>
+                <p className="text-4xl font-bold">{minutos}</p>
                 <p className="text-xs text-gray-500">minutes played</p>
               </div>
             </div>
