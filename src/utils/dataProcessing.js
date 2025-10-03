@@ -499,3 +499,31 @@ export function totalPlaysArtista(nomeArtista) {
     musica => musica.master_metadata_album_artist_name === nomeArtista
   ).length;
 }
+
+// //======================= top 20 Artista =================================
+
+export function obterTop20MusicasArtista(nomeArtista, limit = 20) {
+  if (!dadosHistory || dadosHistory.length === 0) {
+    return [];
+  }
+
+  const tempoPorMusica = {};
+
+  dadosHistory.forEach(musica => {
+    if (
+      musica.master_metadata_album_artist_name === nomeArtista &&
+      musica.master_metadata_track_name
+    ) {
+      const nome = musica.master_metadata_track_name;
+      const ms = musica.ms_played || 0;
+      if (!tempoPorMusica[nome]) {
+        tempoPorMusica[nome] = { nome, msTotal: 0 };
+      }
+      tempoPorMusica[nome].msTotal += ms;
+    }
+  });
+
+  return Object.values(tempoPorMusica)
+    .sort((a, b) => b.msTotal - a.msTotal)
+    .slice(0, limit);
+}

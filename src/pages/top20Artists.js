@@ -1,7 +1,8 @@
 import Link from 'next/link'
+import { obterTop20MusicasArtista } from '../utils/dataProcessing';
 
 export default function Estatisticas() {
- {/*   const top20 = CHAMARAFUNÇÃO(100);     */} 
+  const top20 = obterTop20MusicasArtista("Kendrick Lamar", 20);
 
   return (
     <div className="bg-black min-h-screen">
@@ -21,20 +22,17 @@ export default function Estatisticas() {
           </figure>
         </div>
         
-{/*
         <ol className="text-sm">
         {top20.map((item, idx) => (
           <li key={idx} className="relative bg-linear-to-r from-[#212121] from-50% to-[#121212] to-100% pl-4 p-3 py-4 rounded-[10px] mb-5 first:bg-[url(/img/artist_icon_top_100.jpg)] first:max-w-[440px] first:rounded-t-[0px] first:pt-[85%] first:bg-cover first:text-lg first:text-shadow-[0_0px_4px_rgb(0_0_0)]">
-            <Link href="/artistProfile" className="flex gap-3 space-between relative">
+            <div className="flex gap-3 space-between relative">
               <p className="pt-2">#{idx + 1}</p>
-              <span className="pt-2">{item.artista}</span>
-              <span className="absolute pt-[11px] text-[#B3B3B3] text-[12px] right-5">{item.plays} plays</span>
-            </Link>
+              <span className="pt-2">{item.nome}</span>
+              <span className="absolute pt-[11px] text-[#B3B3B3] text-[12px] right-5">{Math.floor(item.msTotal / 60000)} min ouvidos</span>
+            </div>
           </li>
         ))}
       </ol>
-*/}
-
       </div>
     </div>
   )
